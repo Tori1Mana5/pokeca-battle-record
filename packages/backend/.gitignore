@@ -1,0 +1,30 @@
+# NestJS
+dist
+node_modules
+
+# Prisma
+*.db
+*.db-journal
+
+# ログとキャッシュ
+*.log
+.cache
+
+# テスト
+coverage
+.nyc_output
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 環境変数
+.env
+.env.local
+.env.*.local

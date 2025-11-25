@@ -1,0 +1,15 @@
+# Vite
+dist
+dist-ssr
+*.local
+
+# エディタ
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
