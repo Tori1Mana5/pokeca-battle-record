@@ -292,23 +292,27 @@ function RecordForm({ onSave }: { onSave: (record: MatchRecord) => void }) {
       <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
         <div>
           <label className='block text-sm font-bold mb-1 text-gray-700'>自分が取ったサイドの数</label>
-          <input 
-            type='number' 
-            min='0'
-            max='6'
+          <select
             value={formData.mySides}
             onChange={(e) => setFormData({...formData, mySides: Number(e.target.value)})}
-            className='w-full bg-gray-100 p-2 rounded-none text-sm outline-purple-400' />
+            className='w-full bg-gray-100 p-2 rounded-lg text-sm outline-purple-400'
+          >
+            {[0, 1, 2, 3, 4, 5, 6].map((n) => (
+              <option key={n} value={n}>{n}</option>
+            ))}
+          </select>
         </div>
         <div>
           <label className='block text-sm font-bold mb-1 text-gray-700'>相手が取ったサイドの数</label>
-          <input
-            type='number' 
-            min='0'
-            max='6'
+          <select
             value={formData.opponentSides}
             onChange={(e) => setFormData({...formData, opponentSides: Number(e.target.value)})}
-            className='w-full bg-gray-100 p-2 rounded-none text-sm outline-purple-400' />
+            className='w-full bg-gray-100 p-2 rounded-lg text-sm outline-purple-400'
+          >
+            {[0, 1, 2, 3, 4, 5, 6].map((n) => (
+              <option key={n} value={n}>{n}</option>
+            ))}
+          </select>
         </div>
       </div>
       {/* 試合結果 */}
