@@ -116,7 +116,7 @@ function HistoryView({ records, onDelete } : {records: MatchRecord[], onDelete: 
 
   return (
     <div className='space-y-6'>
-      <div className='grid grid-cols-3 gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
         <SummaryCard icon={<Target className='text-purple-500 ' />} label='総試合数' value={`${totalMatches}試合`} color='border-purple-400 shadow-purple-100' />
         <SummaryCard icon={<Trophy className='text- green-500 ' />} label='戦績' value={`${wins}勝 ${loses}敗`} color='border-green-400 shadow-green-100' />
         <SummaryCard icon={<TrendingUp className='text-blue-500 ' />} label='勝率' value={`${winRate}`} color='border-blue-400 shadow-blue-100' />
@@ -147,7 +147,7 @@ function HistoryView({ records, onDelete } : {records: MatchRecord[], onDelete: 
               <span>{record.opponent || '対戦相手不明'}</span>
             </div>
 
-            <div className='grid grid-cols-2 gap-8 text-sm px-2'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-8 text-sm px-2'>
               <div className="flex items-center gap-2 text-gray-500 text-sm">
                 <User size={16} />
                 <span>{record.myDeck}</span>
@@ -246,7 +246,7 @@ function RecordForm({ onSave }: { onSave: (record: MatchRecord) => void }) {
   return (
     <div className='bg-white rounded-xl p-6 shadow-sm space-y-6'>
       {/* 日付と対戦相手 */}
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
         <div>
           <label className='block text-sm font-bold mb-1 text-gray-700'>日付</label>
           <input 
@@ -268,7 +268,7 @@ function RecordForm({ onSave }: { onSave: (record: MatchRecord) => void }) {
         </div>
       </div>
       {/* 自分のデッキと相手のデッキ */}
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
         <div>
           <label className='block text-sm font-bold mb-1 text-gray-700'>自分のデッキ</label>
           <input 
@@ -289,7 +289,7 @@ function RecordForm({ onSave }: { onSave: (record: MatchRecord) => void }) {
         </div>
       </div>
       {/* 取ったサイド数 */}
-      <div className='grid grid-cols-2 gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
         <div>
           <label className='block text-sm font-bold mb-1 text-gray-700'>自分が取ったサイドの数</label>
           <input 
