@@ -14,7 +14,7 @@ type MatchRecord = {
 
 import { Trophy, Calendar } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Target, TrendingUp, User, Swords, Medal, Trash2 } from 'lucide-react';
+import { Target, TrendingUp, User, Swords, Medal, Trash2, Share2 } from 'lucide-react';
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<'record' | 'history'>('record');
@@ -114,6 +114,38 @@ function HistoryView({ records, onDelete } : {records: MatchRecord[], onDelete: 
     );
   }
 
+  // 戦績共有用のテキスト作成
+  const buildShareText = (): string => {
+    let text = `【戦 績】${wins}勝 ${loses}敗 (勝率${winRate}%)\n------\n`;
+
+    for (const r of records) {
+      const resultText = r.result === 'win' ? '⭕️' : '❌';
+      text += `${resultText} ${r.mySides} - ${r.opponentSides} ${r.myDeck} vs ${r.opponentDeck}\n`;
+    }
+
+    return text;
+  };
+
+  const [isSharing, setIsSharing] = useState(false);
+
+  const handleShare = async () => {
+    // 戦績を共有中か判定
+    if (isSharing) return;
+    setIsSharing(true);
+
+    const text = buildShareText();
+
+    try {
+      await navigator.share({
+        title: 'ポケカ戦績',
+        text: text,
+      });
+    } catch {
+    } finally {
+      setIsSharing(false);
+    }
+  };
+
   return (
     <div className='space-y-6'>
       <div className='grid grid-cols-1 sm:grid-cols-3 gap-4'>
@@ -121,6 +153,16 @@ function HistoryView({ records, onDelete } : {records: MatchRecord[], onDelete: 
         <SummaryCard icon={<Trophy className='text- green-500 ' />} label='戦績' value={`${wins}勝 ${loses}敗`} color='border-green-400 shadow-green-100' />
         <SummaryCard icon={<TrendingUp className='text-blue-500 ' />} label='勝率' value={`${winRate}`} color='border-blue-400 shadow-blue-100' />
       </div>
+        <button
+          onClick={handleShare}
+          disabled={isSharing}
+          className="w-full bg-purple-600 text-white font-bold py-3 rounded-xl
+                    hover:bg-purple-700 transition-colors shadow-md shadow-purple-100
+                    flex items-center justify-center gap-2 disabled:opacity-50"
+        >
+          <Share2 size={18} />
+          {isSharing ? '共有中...' : '戦績を共有する'}
+        </button>
 
       {records.map((record) => (
         <div key={record.id} className={`rounded-xl p-4 border relative ${
